@@ -18,5 +18,6 @@ public class ClassMain {
      public static void main(String[] args) throws SQLException {
         Login log = new Login();
         log.setVisible(true);
+        log.setLocationRelativeTo(null);
     }
 }

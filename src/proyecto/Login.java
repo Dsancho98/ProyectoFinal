@@ -206,6 +206,7 @@ static public Connection con;
        Menu men = new Menu();
        men.setVisible(true);
        this.setVisible(false);
+       men.setLocationRelativeTo(null);
        }
        else{
            password.setText("");
