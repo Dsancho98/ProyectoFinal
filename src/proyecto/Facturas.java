@@ -83,6 +83,7 @@ static public Connection con;
         siguientebutton = new javax.swing.JButton();
         primerobutton = new javax.swing.JButton();
         ultimobutton = new javax.swing.JButton();
+        eliminar = new javax.swing.JButton();
 
         jList1.setModel(new javax.swing.AbstractListModel<String>() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
@@ -208,6 +209,13 @@ static public Connection con;
             }
         });
 
+        eliminar.setText("Eliminar");
+        eliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                eliminarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -232,19 +240,20 @@ static public Connection con;
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(aceptarbutton, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(editarbutton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(ultimobutton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(anteriorbutton, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(nuevobutton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(siguientebutton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(primerobutton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(jButton2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(editarbutton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(ultimobutton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(anteriorbutton, javax.swing.GroupLayout.DEFAULT_SIZE, 87, Short.MAX_VALUE))
+                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(nuevobutton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(siguientebutton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(primerobutton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(eliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(0, 97, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -279,7 +288,9 @@ static public Connection con;
                     .addComponent(editarbutton)
                     .addComponent(nuevobutton))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
-                .addComponent(jButton1)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(eliminar)
+                    .addComponent(jButton1))
                 .addContainerGap())
         );
 
@@ -376,6 +387,8 @@ static public Connection con;
 
     private void nuevobuttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nuevobuttonActionPerformed
        Identificador.setEnabled(true);
+       eliminar.setEnabled(false);
+       eliminar.setVisible(false);
        Identificador.setText("");
        PrecioTotal.setText("");
        Fechancala.setText("");       
@@ -390,6 +403,8 @@ static public Connection con;
     }//GEN-LAST:event_nuevobuttonActionPerformed
 
     private void aceptarbuttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aceptarbuttonActionPerformed
+        eliminar.setEnabled(true);
+       eliminar.setVisible(true);
         String uno=PrecioTotal.getText();
         String dos=Fechancala.getText();
         String asd=Identificador.getText();
@@ -422,6 +437,8 @@ static public Connection con;
     }//GEN-LAST:event_aceptarbuttonActionPerformed
 
     private void cancelbuttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelbuttonActionPerformed
+        eliminar.setEnabled(true);
+       eliminar.setVisible(true);
         Identificador.setEnabled(false);
         aceptarbutton.setVisible(false); aceptarbutton.setVisible(false);
         cancelbutton.setEnabled(false);  cancelbutton.setVisible(false);
@@ -458,6 +475,19 @@ static public Connection con;
         menyo.setLocationRelativeTo(null);
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    private void eliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eliminarActionPerformed
+        try {
+            int numerofac=Integer.parseInt(Identificador.getText());
+            String eliminacion="DELETE FROM facturas WHERE IdFactura="+numerofac;
+        
+            Statement s5 = (Statement) connection.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
+            int r4=s5.executeUpdate(eliminacion);
+            regenerardatos();
+        } catch (SQLException ex) {
+            Logger.getLogger(Facturas.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_eliminarActionPerformed
+
     
 
 
@@ -469,6 +499,7 @@ static public Connection con;
     private javax.swing.JButton anteriorbutton;
     private javax.swing.JButton cancelbutton;
     private javax.swing.JButton editarbutton;
+    private javax.swing.JButton eliminar;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;

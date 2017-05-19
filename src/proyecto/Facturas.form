@@ -121,22 +121,23 @@
                       </Group>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="jButton1" min="-2" pref="81" max="-2" attributes="0"/>
-                      <Group type="102" attributes="0">
-                          <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                              <Component id="jButton2" min="-2" pref="62" max="-2" attributes="0"/>
-                              <Component id="editarbutton" max="32767" attributes="0"/>
-                              <Component id="ultimobutton" alignment="1" max="32767" attributes="0"/>
-                              <Component id="anteriorbutton" alignment="1" min="-2" pref="87" max="-2" attributes="0"/>
-                          </Group>
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                              <Component id="nuevobutton" max="32767" attributes="0"/>
-                              <Component id="siguientebutton" alignment="0" max="32767" attributes="0"/>
-                              <Component id="primerobutton" alignment="1" min="-2" pref="91" max="-2" attributes="0"/>
-                          </Group>
+                  <Group type="103" groupAlignment="1" attributes="0">
+                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                          <Component id="jButton2" alignment="1" min="-2" pref="62" max="-2" attributes="0"/>
+                          <Component id="editarbutton" alignment="1" max="32767" attributes="0"/>
+                          <Component id="ultimobutton" alignment="1" max="32767" attributes="0"/>
+                          <Component id="anteriorbutton" alignment="0" pref="87" max="32767" attributes="0"/>
                       </Group>
+                      <Component id="jButton1" min="-2" pref="81" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="1" attributes="0">
+                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                          <Component id="nuevobutton" max="32767" attributes="0"/>
+                          <Component id="siguientebutton" alignment="0" max="32767" attributes="0"/>
+                          <Component id="primerobutton" alignment="1" min="-2" pref="91" max="-2" attributes="0"/>
+                      </Group>
+                      <Component id="eliminar" min="-2" pref="87" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace min="0" pref="97" max="32767" attributes="0"/>
               </Group>
@@ -181,7 +182,10 @@
                       <Component id="nuevobutton" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace pref="18" max="32767" attributes="0"/>
-                  <Component id="jButton1" min="-2" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="eliminar" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jButton1" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
           </Group>
@@ -309,6 +313,14 @@
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="ultimobuttonActionPerformed"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JButton" name="eliminar">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Eliminar"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="eliminarActionPerformed"/>
           </Events>
         </Component>
       </SubComponents>
