@@ -212,10 +212,14 @@ public class Menu extends javax.swing.JFrame {
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
         
+        try {
             ProductosVisualiza pv = new ProductosVisualiza();
             this.setVisible(false);
             pv.setVisible(true);
             pv.setLocationRelativeTo(null);
+        } catch (SQLException ex) {
+            Logger.getLogger(Menu.class.getName()).log(Level.SEVERE, null, ex);
+        }
         
     }//GEN-LAST:event_jButton7ActionPerformed
 
