@@ -14,8 +14,8 @@ import java.util.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
-import static proyecto.ProductosFactura.connection;
-import static proyecto.ProductosFactura.r;
+import proyecto.LineasFactura;
+
 
 /**
  *
@@ -24,14 +24,14 @@ import static proyecto.ProductosFactura.r;
 public class Facturas extends javax.swing.JFrame {
     static public ResultSet r2;
     static public ResultSet r3;
-static public Connection con;
+static public Connection connection;
   
     public Facturas() throws SQLException {
-        initComponents();
-         aceptarbutton.setVisible(false);
+        initComponents();        
+/*         aceptarbutton.setVisible(false);
         aceptarbutton.setVisible(false);
         cancelbutton.setEnabled(false);
-        cancelbutton.setVisible(false);
+        cancelbutton.setVisible(false);*/
          Login log = new Login();
         String url ="jdbc:mysql://localhost:3306/tiendaanimales";
         String user="Dependiente";
@@ -50,7 +50,16 @@ static public Connection con;
         PrecioTotal.setText(r3.getString("Precio"));
         Fechancala.setText(r3.getString("Fecha"));
         }
-       
+     public String giveme(){
+         String codigo=Identificador.getText();
+         return codigo;
+     }
+       public void nuevafactura() throws SQLException{
+            String inser="INSERT INTO facturas(IdFactura,Fecha) SELECT MAX(IdFactura)+1,CURDATE() FROM FACTURAS";
+            Statement s = (Statement) connection.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
+            int a=s.executeUpdate(inser);
+            regenerardatos();
+       }
     
     /**
      * This method is called from within the constructor to initialize the form.
@@ -67,11 +76,8 @@ static public Connection con;
         jTable1 = new javax.swing.JTable();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        editarbutton = new javax.swing.JButton();
         Identificador = new javax.swing.JTextField();
         nuevobutton = new javax.swing.JButton();
-        aceptarbutton = new javax.swing.JButton();
-        cancelbutton = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
@@ -83,7 +89,7 @@ static public Connection con;
         siguientebutton = new javax.swing.JButton();
         primerobutton = new javax.swing.JButton();
         ultimobutton = new javax.swing.JButton();
-        eliminar = new javax.swing.JButton();
+        nuevobutton1 = new javax.swing.JButton();
 
         jList1.setModel(new javax.swing.AbstractListModel<String>() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
@@ -114,13 +120,6 @@ static public Connection con;
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
         jLabel1.setText("Facturas");
 
-        editarbutton.setText("Editar");
-        editarbutton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                editarbuttonActionPerformed(evt);
-            }
-        });
-
         Identificador.setEnabled(false);
         Identificador.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -128,24 +127,10 @@ static public Connection con;
             }
         });
 
-        nuevobutton.setText("Nuevo");
+        nuevobutton.setText("Modificar");
         nuevobutton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 nuevobuttonActionPerformed(evt);
-            }
-        });
-
-        aceptarbutton.setText("Aceptar");
-        aceptarbutton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                aceptarbuttonActionPerformed(evt);
-            }
-        });
-
-        cancelbutton.setText("Cancelar");
-        cancelbutton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cancelbuttonActionPerformed(evt);
             }
         });
 
@@ -209,10 +194,10 @@ static public Connection con;
             }
         });
 
-        eliminar.setText("Eliminar");
-        eliminar.addActionListener(new java.awt.event.ActionListener() {
+        nuevobutton1.setText("Nuevo");
+        nuevobutton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                eliminarActionPerformed(evt);
+                nuevobutton1ActionPerformed(evt);
             }
         });
 
@@ -229,32 +214,27 @@ static public Connection con;
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(Identificador, javax.swing.GroupLayout.PREFERRED_SIZE, 255, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jButton2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(ultimobutton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(anteriorbutton, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel1)
                             .addComponent(PrecioTotal, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 255, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(Fechancala, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 255, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(cancelbutton, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(Identificador, javax.swing.GroupLayout.PREFERRED_SIZE, 255, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(aceptarbutton, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(nuevobutton, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(jButton2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(editarbutton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(ultimobutton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(anteriorbutton, javax.swing.GroupLayout.DEFAULT_SIZE, 87, Short.MAX_VALUE))
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(nuevobutton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(siguientebutton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(primerobutton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(eliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(0, 97, Short.MAX_VALUE))
+                        .addComponent(siguientebutton, javax.swing.GroupLayout.DEFAULT_SIZE, 91, Short.MAX_VALUE)
+                        .addComponent(primerobutton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(nuevobutton1, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(0, 33, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -263,34 +243,35 @@ static public Connection con;
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel1)
-                        .addGap(32, 32, 32))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addGap(33, 33, 33)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(Identificador, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel2))
+                        .addGap(28, 28, 28)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel4)
+                            .addComponent(PrecioTotal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(27, 27, 27)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel5)
+                            .addComponent(Fechancala, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 36, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(Identificador, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2)
-                    .addComponent(anteriorbutton)
-                    .addComponent(siguientebutton)
-                    .addComponent(aceptarbutton))
-                .addGap(26, 26, 26)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel4)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(PrecioTotal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(ultimobutton)
-                        .addComponent(primerobutton)
-                        .addComponent(cancelbutton)))
-                .addGap(24, 24, 24)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel5)
-                    .addComponent(Fechancala, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(editarbutton)
-                    .addComponent(nuevobutton))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(eliminar)
-                    .addComponent(jButton1))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(anteriorbutton)
+                            .addComponent(siguientebutton))
+                        .addGap(26, 26, 26)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(ultimobutton)
+                            .addComponent(primerobutton))
+                        .addGap(28, 28, 28)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(nuevobutton)
+                            .addComponent(nuevobutton1))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton1)))
                 .addContainerGap())
         );
 
@@ -298,7 +279,7 @@ static public Connection con;
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -365,95 +346,20 @@ static public Connection con;
         }
     }//GEN-LAST:event_ultimobuttonActionPerformed
 
-    private void editarbuttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editarbuttonActionPerformed
-        String uno=PrecioTotal.getText();
-        String dos=Fechancala.getText();
-        String asd=Identificador.getText();
-        String query2="UPDATE facturas SET Fecha='"+dos+"',Precio="+uno+" WHERE IdFactura="+asd;
-         Statement s2;
-        try {
-            s2 = (Statement) connection.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);       
-        int r=s2.executeUpdate(query2);         
-           Facturas f = new Facturas ();    
-           f = new Facturas();
-           f.setVisible(true);
-            this.setVisible(false);
-            f.setLocationRelativeTo(null);
-       
-         } catch (SQLException ex) {
-            Logger.getLogger(Facturas.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }//GEN-LAST:event_editarbuttonActionPerformed
-
     private void nuevobuttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nuevobuttonActionPerformed
-       Identificador.setEnabled(true);
-       eliminar.setEnabled(false);
-       eliminar.setVisible(false);
-       Identificador.setText("");
-       PrecioTotal.setText("");
-       Fechancala.setText("");       
-        aceptarbutton.setVisible(true); aceptarbutton.setVisible(true);
-        cancelbutton.setEnabled(true);  cancelbutton.setVisible(true);
-        siguientebutton.setVisible(false); siguientebutton.setEnabled(false);
-        anteriorbutton.setVisible(false); anteriorbutton.setEnabled(false);
-        primerobutton.setVisible(false); primerobutton.setEnabled(false);
-        ultimobutton.setVisible(false); ultimobutton.setEnabled(false);
-        editarbutton.setVisible(false); editarbutton.setEnabled(false);
-        nuevobutton.setVisible(false); nuevobutton.setEnabled(false);
-    }//GEN-LAST:event_nuevobuttonActionPerformed
 
-    private void aceptarbuttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aceptarbuttonActionPerformed
-        eliminar.setEnabled(true);
-       eliminar.setVisible(true);
-        String uno=PrecioTotal.getText();
-        String dos=Fechancala.getText();
-        String asd=Identificador.getText();
-        String query3="INSERT INTO facturas VALUES("+asd+",'"+dos+"',"+uno+")";
-        Statement s3;
-        try { 
-            s3= (Statement) connection.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
-            int r=s3.executeUpdate(query3);        
-        } catch (SQLException ex) {
-            Logger.getLogger(Facturas.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        Identificador.setEnabled(false);
-        aceptarbutton.setVisible(false); aceptarbutton.setVisible(false);
-        cancelbutton.setEnabled(false);  cancelbutton.setVisible(false);
-        siguientebutton.setVisible(true); siguientebutton.setEnabled(true);
-        anteriorbutton.setVisible(true); anteriorbutton.setEnabled(true);
-        primerobutton.setVisible(true); primerobutton.setEnabled(true);
-        ultimobutton.setVisible(true); ultimobutton.setEnabled(true);
-        editarbutton.setVisible(true); editarbutton.setEnabled(true);
-        nuevobutton.setVisible(true); nuevobutton.setEnabled(true);
-         try {
-           Facturas f = new Facturas ();    
-           f = new Facturas();
-           f.setVisible(true);
-            this.setVisible(false);
-            f.setLocationRelativeTo(null);
-        } catch (SQLException ex) {
-            Logger.getLogger(Menu.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }//GEN-LAST:event_aceptarbuttonActionPerformed
-
-    private void cancelbuttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelbuttonActionPerformed
-        eliminar.setEnabled(true);
-       eliminar.setVisible(true);
-        Identificador.setEnabled(false);
-        aceptarbutton.setVisible(false); aceptarbutton.setVisible(false);
-        cancelbutton.setEnabled(false);  cancelbutton.setVisible(false);
-        siguientebutton.setVisible(true); siguientebutton.setEnabled(true);
-        anteriorbutton.setVisible(true); anteriorbutton.setEnabled(true);
-        primerobutton.setVisible(true); primerobutton.setEnabled(true);
-        ultimobutton.setVisible(true); ultimobutton.setEnabled(true);
-        editarbutton.setVisible(true); editarbutton.setEnabled(true);
-        nuevobutton.setVisible(true); nuevobutton.setEnabled(true);
+        
         try {
-            regenerardatos();
+            LineasFactura far = new LineasFactura();
+            far.setVisible(true);
+            this.setVisible(false);
+            far.setLocationRelativeTo(null);
         } catch (SQLException ex) {
             Logger.getLogger(Facturas.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }//GEN-LAST:event_cancelbuttonActionPerformed
+        
+        
+    }//GEN-LAST:event_nuevobuttonActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         Login log = new Login();
@@ -475,18 +381,23 @@ static public Connection con;
         menyo.setLocationRelativeTo(null);
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    private void eliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eliminarActionPerformed
-        try {
-            int numerofac=Integer.parseInt(Identificador.getText());
-            String eliminacion="DELETE FROM facturas WHERE IdFactura="+numerofac;
-        
-            Statement s5 = (Statement) connection.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
-            int r4=s5.executeUpdate(eliminacion);
-            regenerardatos();
+    private void nuevobutton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nuevobutton1ActionPerformed
+        try {                
+            r3.refreshRow();
+        if(r3.last()){
+            Identificador.setText(r3.getString("IdFactura"));
+                 PrecioTotal.setText(r3.getString("Precio"));
+                 Fechancala.setText(r3.getString("Fecha"));
+        }
+         
+            /*LineasFactura far = new LineasFactura();
+            far.setVisible(true);
+            this.setVisible(false);
+            far.setLocationRelativeTo(null);*/
         } catch (SQLException ex) {
             Logger.getLogger(Facturas.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }//GEN-LAST:event_eliminarActionPerformed
+    }//GEN-LAST:event_nuevobutton1ActionPerformed
 
     
 
@@ -495,11 +406,7 @@ static public Connection con;
     private javax.swing.JTextField Fechancala;
     private javax.swing.JTextField Identificador;
     private javax.swing.JTextField PrecioTotal;
-    private javax.swing.JButton aceptarbutton;
     private javax.swing.JButton anteriorbutton;
-    private javax.swing.JButton cancelbutton;
-    private javax.swing.JButton editarbutton;
-    private javax.swing.JButton eliminar;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
@@ -512,8 +419,10 @@ static public Connection con;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTable1;
     private javax.swing.JButton nuevobutton;
+    private javax.swing.JButton nuevobutton1;
     private javax.swing.JButton primerobutton;
     private javax.swing.JButton siguientebutton;
     private javax.swing.JButton ultimobutton;
     // End of variables declaration//GEN-END:variables
+
 }

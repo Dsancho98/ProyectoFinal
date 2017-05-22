@@ -86,20 +86,9 @@ public class ProductosVisualiza extends javax.swing.JFrame {
         if (r3.next()) {
             value1.addElement(r3.getString("Animal"));
         }
-        combotipo.setModel(value1);
-    }
+        combotipo.setModel(value1);    }
     
-    public void recuperartipoatras(String tipo) throws SQLException {
-        DefaultComboBoxModel value1 = new DefaultComboBoxModel();
-        String dameanimal = "SELECT * FROM animales WHERE IdAnimal=" + tipo;
-        Statement s2 = connection.createStatement();
-        r3 = s2.executeQuery(dameanimal);
-
-        if (r3.previous()) {
-            value1.addElement(r3.getString("Animal"));
-        }
-        combotipo.setModel(value1);
-    }
+  
 
     public String dameidanimal() throws SQLException {
         String Animal1 = (String) combotipo.getSelectedItem();
@@ -136,6 +125,9 @@ public class ProductosVisualiza extends javax.swing.JFrame {
         desc = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
+        jButton4 = new javax.swing.JButton();
+        jButton5 = new javax.swing.JButton();
+        jButton6 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -161,6 +153,7 @@ public class ProductosVisualiza extends javax.swing.JFrame {
         tipoh.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         tipoh.setText("Tipo");
 
+        ident1.setEditable(false);
         ident1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 ident1ActionPerformed(evt);
@@ -172,12 +165,17 @@ public class ProductosVisualiza extends javax.swing.JFrame {
 
         combotipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         combotipo.setEnabled(false);
+        combotipo.setFocusable(false);
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel4.setText("Descripción");
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel5.setText("Nombre");
+
+        namae.setEditable(false);
+
+        desc.setEditable(false);
 
         jButton1.setText("Siguiente");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -186,10 +184,31 @@ public class ProductosVisualiza extends javax.swing.JFrame {
             }
         });
 
-        jButton3.setText("Cancelar");
+        jButton3.setText("Anterior");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton3ActionPerformed(evt);
+            }
+        });
+
+        jButton4.setText("Primero");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
+
+        jButton5.setText("Ultimo");
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
+
+        jButton6.setText("Salir");
+        jButton6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton6ActionPerformed(evt);
             }
         });
 
@@ -203,27 +222,37 @@ public class ProductosVisualiza extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(30, 30, 30))
+                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jLabel5)
-                            .addComponent(jLabel4)
-                            .addComponent(ident1)
-                            .addComponent(tipoh)
-                            .addComponent(combotipo, 0, 269, Short.MAX_VALUE)
-                            .addComponent(namae)
-                            .addComponent(desc))
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(combo2, javax.swing.GroupLayout.PREFERRED_SIZE, 269, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.LEADING))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 40, Short.MAX_VALUE)
-                        .addComponent(jButton1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(48, 48, 48))))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(combo2, javax.swing.GroupLayout.PREFERRED_SIZE, 269, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.LEADING))
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(jLabel5)
+                                .addComponent(jLabel4)
+                                .addComponent(ident1)
+                                .addComponent(tipoh)
+                                .addComponent(combotipo, 0, 269, Short.MAX_VALUE)
+                                .addComponent(namae)
+                                .addComponent(desc)))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 38, Short.MAX_VALUE)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                        .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGap(12, 12, 12))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addGap(30, 30, 30))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -241,8 +270,15 @@ public class ProductosVisualiza extends javax.swing.JFrame {
                     .addComponent(jButton3))
                 .addGap(14, 14, 14)
                 .addComponent(ident1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(tipoh)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(tipoh))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(2, 2, 2)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jButton4)
+                            .addComponent(jButton5))))
                 .addGap(18, 18, 18)
                 .addComponent(combotipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -252,8 +288,10 @@ public class ProductosVisualiza extends javax.swing.JFrame {
                 .addGap(13, 13, 13)
                 .addComponent(jLabel4)
                 .addGap(18, 18, 18)
-                .addComponent(desc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(64, Short.MAX_VALUE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(desc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 22, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -274,13 +312,11 @@ public class ProductosVisualiza extends javax.swing.JFrame {
 
         try {
             if (combo2.getSelectedItem() == "objetos") {
-                combotipo.setVisible(false);
-                combotipo.setEnabled(false);
+                combotipo.setVisible(false);               
                 tipoh.setVisible(false);
                 regenerardatos();
             } else {
-                combotipo.setVisible(true);
-                combotipo.setEnabled(true);
+                combotipo.setVisible(true);                
                 tipoh.setVisible(true);
                 regenerardatos();
             }
@@ -339,7 +375,7 @@ public class ProductosVisualiza extends javax.swing.JFrame {
                 tipo = r.getString("Tipo");
                 namae.setText(r.getString("Nombre"));
                 desc.setText(r.getString("Descripcion"));
-                recuperartipoatras(tipo);
+                recuperartipo(tipo);
             }            
             }else{
                 if (r.previous()) {
@@ -353,6 +389,59 @@ public class ProductosVisualiza extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jButton3ActionPerformed
 
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        try {
+            if (combo2.getSelectedItem() != "objetos") {
+            String tipo = "";
+            if (r.first()) {
+                ident1.setText(r.getString("identificador"));
+                tipo = r.getString("Tipo");
+                namae.setText(r.getString("Nombre"));
+                desc.setText(r.getString("Descripcion"));
+                recuperartipo(tipo);
+            }            
+            }else{
+                if (r.first()) {
+                ident1.setText(r.getString("identificador"));
+                namae.setText(r.getString("Nombre"));
+                desc.setText(r.getString("Descripcion"));
+                }
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(ProductosVisualiza.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+         try {
+            if (combo2.getSelectedItem() != "objetos") {
+            String tipo = "";
+            if (r.last()) {
+                ident1.setText(r.getString("identificador"));
+                tipo = r.getString("Tipo");
+                namae.setText(r.getString("Nombre"));
+                desc.setText(r.getString("Descripcion"));
+                recuperartipo(tipo);
+            }            
+            }else{
+                if (r.last()) {
+                ident1.setText(r.getString("identificador"));
+                namae.setText(r.getString("Nombre"));
+                desc.setText(r.getString("Descripcion"));
+                }
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(ProductosVisualiza.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jButton5ActionPerformed
+
+    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+        Menu menyo=new Menu();
+        this.setVisible(false);
+        menyo.setVisible(true);
+        menyo.setLocationRelativeTo(null);
+    }//GEN-LAST:event_jButton6ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -365,6 +454,9 @@ public class ProductosVisualiza extends javax.swing.JFrame {
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
+    private javax.swing.JButton jButton5;
+    private javax.swing.JButton jButton6;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
