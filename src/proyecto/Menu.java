@@ -102,7 +102,7 @@ public class Menu extends javax.swing.JFrame {
         getContentPane().add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 330, 62, 51));
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/proyecto/leon.jpg"))); // NOI18N
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(-10, -30, 630, 460));
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(-10, -30, 630, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents

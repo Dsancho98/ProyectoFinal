@@ -54,11 +54,22 @@ static public Connection connection;
          String codigo=Identificador.getText();
          return codigo;
      }
-       public void nuevafactura() throws SQLException{
-            String inser="INSERT INTO facturas(IdFactura,Fecha) SELECT MAX(IdFactura)+1,CURDATE() FROM FACTURAS";
+       public int nuevafactura() throws SQLException{
             Statement s = (Statement) connection.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
-            int a=s.executeUpdate(inser);
+            String numfactquery= "SELECT MAX(IdFactura)+1 as uno,CURDATE() as fecha FROM FACTURAS";
+            r2=s.executeQuery(numfactquery);
+            int a=0;
+            String fecha="";
+            if(r2.next()){
+                a=r2.getInt("uno");
+                fecha=r2.getString("fecha");
+            }
+            String inser="INSERT INTO facturas(IdFactura,Fecha) SELECT MAX(IdFactura)+1,CURDATE() FROM FACTURAS";
+            int b=s.executeUpdate(inser);  
+            
+            
             regenerardatos();
+            return a;
        }
     
     /**
@@ -74,22 +85,22 @@ static public Connection connection;
         jList1 = new javax.swing.JList<>();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
-        jPanel1 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
-        Identificador = new javax.swing.JTextField();
-        nuevobutton = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         PrecioTotal = new javax.swing.JTextField();
         Fechancala = new javax.swing.JTextField();
         anteriorbutton = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
         siguientebutton = new javax.swing.JButton();
+        Identificador = new javax.swing.JTextField();
         primerobutton = new javax.swing.JButton();
+        modificar = new javax.swing.JButton();
         ultimobutton = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
         nuevobutton1 = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
+        jLabel3 = new javax.swing.JLabel();
 
         jList1.setModel(new javax.swing.AbstractListModel<String>() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
@@ -114,57 +125,33 @@ static public Connection connection;
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setPreferredSize(new java.awt.Dimension(590, 300));
         setResizable(false);
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPanel1.setBackground(new java.awt.Color(153, 204, 255));
-
-        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
-        jLabel1.setText("Facturas");
-
-        Identificador.setEnabled(false);
-        Identificador.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                IdentificadorActionPerformed(evt);
-            }
-        });
-
-        nuevobutton.setText("Modificar");
-        nuevobutton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                nuevobuttonActionPerformed(evt);
-            }
-        });
-
-        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/proyecto/foto2.png"))); // NOI18N
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
-            }
-        });
-
-        jButton1.setText("Salir");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
-
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Identificador");
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 90, -1, -1));
 
+        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setText("Precio total");
+        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 140, -1, -1));
 
+        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
         jLabel5.setText("Fecha");
+        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 190, -1, -1));
 
         PrecioTotal.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 PrecioTotalActionPerformed(evt);
             }
         });
+        getContentPane().add(PrecioTotal, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 140, 255, -1));
 
         Fechancala.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 FechancalaActionPerformed(evt);
             }
         });
+        getContentPane().add(Fechancala, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 180, 255, -1));
 
         anteriorbutton.setText("Anterior");
         anteriorbutton.addActionListener(new java.awt.event.ActionListener() {
@@ -172,6 +159,12 @@ static public Connection connection;
                 anteriorbuttonActionPerformed(evt);
             }
         });
+        getContentPane().add(anteriorbutton, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 90, 87, -1));
+
+        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel1.setText("Facturas");
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 10, -1, -1));
 
         siguientebutton.setText("Siguiente");
         siguientebutton.addActionListener(new java.awt.event.ActionListener() {
@@ -179,6 +172,15 @@ static public Connection connection;
                 siguientebuttonActionPerformed(evt);
             }
         });
+        getContentPane().add(siguientebutton, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 90, 91, -1));
+
+        Identificador.setEnabled(false);
+        Identificador.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                IdentificadorActionPerformed(evt);
+            }
+        });
+        getContentPane().add(Identificador, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 90, 255, -1));
 
         primerobutton.setText("Primero");
         primerobutton.addActionListener(new java.awt.event.ActionListener() {
@@ -186,6 +188,15 @@ static public Connection connection;
                 primerobuttonActionPerformed(evt);
             }
         });
+        getContentPane().add(primerobutton, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 140, 91, -1));
+
+        modificar.setText("Modificar");
+        modificar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                modificarActionPerformed(evt);
+            }
+        });
+        getContentPane().add(modificar, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 190, 87, -1));
 
         ultimobutton.setText("Ultimo");
         ultimobutton.addActionListener(new java.awt.event.ActionListener() {
@@ -193,6 +204,15 @@ static public Connection connection;
                 ultimobuttonActionPerformed(evt);
             }
         });
+        getContentPane().add(ultimobutton, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 140, 87, -1));
+
+        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/proyecto/foto2.png"))); // NOI18N
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 10, 62, 51));
 
         nuevobutton1.setText("Nuevo");
         nuevobutton1.addActionListener(new java.awt.event.ActionListener() {
@@ -200,91 +220,19 @@ static public Connection connection;
                 nuevobutton1ActionPerformed(evt);
             }
         });
+        getContentPane().add(nuevobutton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 190, 87, -1));
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel5)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(jLabel4)
-                        .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.LEADING)))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(Identificador, javax.swing.GroupLayout.PREFERRED_SIZE, 255, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jButton2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(ultimobutton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(anteriorbutton, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1)
-                            .addComponent(PrecioTotal, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 255, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(Fechancala, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 255, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(nuevobutton, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(siguientebutton, javax.swing.GroupLayout.DEFAULT_SIZE, 91, Short.MAX_VALUE)
-                        .addComponent(primerobutton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addComponent(nuevobutton1, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(0, 33, Short.MAX_VALUE))
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addGap(33, 33, 33)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(Identificador, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel2))
-                        .addGap(28, 28, 28)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel4)
-                            .addComponent(PrecioTotal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(27, 27, 27)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel5)
-                            .addComponent(Fechancala, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 36, Short.MAX_VALUE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(anteriorbutton)
-                            .addComponent(siguientebutton))
-                        .addGap(26, 26, 26)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(ultimobutton)
-                            .addComponent(primerobutton))
-                        .addGap(28, 28, 28)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(nuevobutton)
-                            .addComponent(nuevobutton1))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton1)))
-                .addContainerGap())
-        );
+        jButton1.setText("Salir");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 240, 91, -1));
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-        );
+        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/proyecto/bosque.jpg"))); // NOI18N
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 580, 320));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -346,20 +294,21 @@ static public Connection connection;
         }
     }//GEN-LAST:event_ultimobuttonActionPerformed
 
-    private void nuevobuttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nuevobuttonActionPerformed
-
+    private void modificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_modificarActionPerformed
+        int este=Integer.parseInt(Identificador.getText());
         
         try {
             LineasFactura far = new LineasFactura();
             far.setVisible(true);
             this.setVisible(false);
+            far.setFactura(este);
             far.setLocationRelativeTo(null);
         } catch (SQLException ex) {
             Logger.getLogger(Facturas.class.getName()).log(Level.SEVERE, null, ex);
         }
         
         
-    }//GEN-LAST:event_nuevobuttonActionPerformed
+    }//GEN-LAST:event_modificarActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         Login log = new Login();
@@ -383,17 +332,19 @@ static public Connection connection;
 
     private void nuevobutton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nuevobutton1ActionPerformed
         try {                
-            r3.refreshRow();
+            int nuevo;
+            nuevo = nuevafactura();
         if(r3.last()){
             Identificador.setText(r3.getString("IdFactura"));
                  PrecioTotal.setText(r3.getString("Precio"));
                  Fechancala.setText(r3.getString("Fecha"));
         }
          
-            /*LineasFactura far = new LineasFactura();
+           LineasFactura far = new LineasFactura();
             far.setVisible(true);
+            far.setFactura(nuevo);
             this.setVisible(false);
-            far.setLocationRelativeTo(null);*/
+            far.setLocationRelativeTo(null);
         } catch (SQLException ex) {
             Logger.getLogger(Facturas.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -411,14 +362,14 @@ static public Connection connection;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JList<String> jList1;
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTable1;
-    private javax.swing.JButton nuevobutton;
+    private javax.swing.JButton modificar;
     private javax.swing.JButton nuevobutton1;
     private javax.swing.JButton primerobutton;
     private javax.swing.JButton siguientebutton;

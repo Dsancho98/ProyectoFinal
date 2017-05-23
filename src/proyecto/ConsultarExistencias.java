@@ -22,7 +22,6 @@ public class ConsultarExistencias extends javax.swing.JFrame {
     static public ResultSet r;
     static public ResultSet r2;
     static public ResultSet r3;
-    static public ResultSet r4;
     static public Connection connection;
 
     /**
@@ -79,19 +78,22 @@ public class ConsultarExistencias extends javax.swing.JFrame {
         setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        txt2.setForeground(new java.awt.Color(255, 255, 255));
         txt2.setText("Nombre");
-        getContentPane().add(txt2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 280, -1, -1));
-        getContentPane().add(nombre3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 350, 440, -1));
+        getContentPane().add(txt2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 190, -1, -1));
+        getContentPane().add(nombre3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 260, 440, -1));
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Consultar Existencias");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 120, -1, -1));
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 30, -1, -1));
 
+        txt3.setForeground(new java.awt.Color(255, 255, 255));
         txt3.setText("Nombre");
-        getContentPane().add(txt3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 330, -1, -1));
+        getContentPane().add(txt3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 240, -1, -1));
 
         combo1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Mas", "Menos" }));
-        getContentPane().add(combo1, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 190, 240, -1));
+        getContentPane().add(combo1, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 100, 240, -1));
 
         jButton2.setText("Siguiente");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -99,10 +101,12 @@ public class ConsultarExistencias extends javax.swing.JFrame {
                 jButton2ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 390, -1, -1));
+        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 300, -1, -1));
 
+        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Buscar productos que tengan...");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 160, -1, -1));
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 70, -1, -1));
 
         jButton3.setText("Anterior");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
@@ -110,7 +114,7 @@ public class ConsultarExistencias extends javax.swing.JFrame {
                 jButton3ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 380, -1, -1));
+        getContentPane().add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 290, -1, -1));
 
         jTextField1.setText("0");
         jTextField1.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -118,7 +122,7 @@ public class ConsultarExistencias extends javax.swing.JFrame {
                 jTextField1KeyTyped(evt);
             }
         });
-        getContentPane().add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 190, 82, -1));
+        getContentPane().add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 100, 82, -1));
 
         jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/proyecto/foto2.png"))); // NOI18N
         jButton4.addActionListener(new java.awt.event.ActionListener() {
@@ -126,7 +130,7 @@ public class ConsultarExistencias extends javax.swing.JFrame {
                 jButton4ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 130, 62, 51));
+        getContentPane().add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 40, 62, 51));
 
         jButton1.setText("Buscar");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -134,7 +138,7 @@ public class ConsultarExistencias extends javax.swing.JFrame {
                 jButton1ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 200, -1, -1));
+        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 110, -1, -1));
 
         jButton5.setText("Salir");
         jButton5.addActionListener(new java.awt.event.ActionListener() {
@@ -142,19 +146,21 @@ public class ConsultarExistencias extends javax.swing.JFrame {
                 jButton5ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 390, 70, -1));
+        getContentPane().add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 300, 70, -1));
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("Existencias  o ");
-        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 190, -1, -1));
-        getContentPane().add(nombre1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 250, 440, -1));
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 100, -1, -1));
+        getContentPane().add(nombre1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 160, 440, -1));
 
+        txt1.setForeground(new java.awt.Color(255, 255, 255));
         txt1.setText("Nombre");
-        getContentPane().add(txt1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 230, -1, -1));
-        getContentPane().add(nombre2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 300, 440, -1));
+        getContentPane().add(txt1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 140, -1, -1));
+        getContentPane().add(nombre2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 210, 440, -1));
 
         jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/proyecto/bosque.jpg"))); // NOI18N
-        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 11, -1, -1));
+        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 580, 350));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
