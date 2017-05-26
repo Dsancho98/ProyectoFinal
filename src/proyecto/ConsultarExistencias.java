@@ -29,9 +29,9 @@ public class ConsultarExistencias extends javax.swing.JFrame {
      */
     public ConsultarExistencias() throws SQLException {
         initComponents();
-        String url = "jdbc:mysql://localhost:3306/tiendaanimales";
-        String user = "Dependiente";
-        String contra = "roto2";
+         String url ="jdbc:mysql://localhost:3306/tiendaanimales";
+        String user="root";
+        String contra="";
         connection = DriverManager.getConnection(url, user, contra);
 
         Statement s = (Statement) connection.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
@@ -81,6 +81,8 @@ public class ConsultarExistencias extends javax.swing.JFrame {
         txt2.setForeground(new java.awt.Color(255, 255, 255));
         txt2.setText("Nombre");
         getContentPane().add(txt2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 190, -1, -1));
+
+        nombre3.setEditable(false);
         getContentPane().add(nombre3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 260, 440, -1));
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
@@ -152,11 +154,15 @@ public class ConsultarExistencias extends javax.swing.JFrame {
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("Existencias  o ");
         getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 100, -1, -1));
+
+        nombre1.setEditable(false);
         getContentPane().add(nombre1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 160, 440, -1));
 
         txt1.setForeground(new java.awt.Color(255, 255, 255));
         txt1.setText("Nombre");
         getContentPane().add(txt1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 140, -1, -1));
+
+        nombre2.setEditable(false);
         getContentPane().add(nombre2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 210, 440, -1));
 
         jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/proyecto/bosque.jpg"))); // NOI18N
@@ -264,11 +270,7 @@ public class ConsultarExistencias extends javax.swing.JFrame {
         log.setVisible(true);
         log.setLocationRelativeTo(null);
         this.setVisible(false);
-        try {
-            log.desconectar();
-        } catch (SQLException ex) {
-            Logger.getLogger(Menu.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        log.setLocationRelativeTo(null);
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed

@@ -32,10 +32,9 @@ static public Connection connection;
         initComponents();
              
           Connection con = null;
-        
-        String url ="jdbc:mysql://localhost:3306/tiendaanimales";
-        String user="Dependiente";
-        String contra="roto2";
+       String url ="jdbc:mysql://localhost:3306/tiendaanimales";
+        String user="root";
+        String contra="";
         connection = DriverManager.getConnection(url,user,contra);
         
         Statement s = (Statement) connection.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
@@ -165,13 +164,8 @@ static public Connection connection;
         Login log = new Login();
         log.setVisible(true);
         log.setLocationRelativeTo(null);
-        this.setVisible(false);
-        try {
-            log.desconectar();
-        } catch (SQLException ex) {
-            Logger.getLogger(Menu.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
+        this.setVisible(false);      
+        log.setLocationRelativeTo(null);
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed

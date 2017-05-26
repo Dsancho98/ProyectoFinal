@@ -30,15 +30,13 @@ static public Connection connection;
     public LineasFactura() throws SQLException {
         initComponents();
         
-        String url ="jdbc:mysql://localhost:3306/tiendaanimales";
-        String user="Dependiente";
-        String contra="roto2";
+       String url ="jdbc:mysql://localhost:3306/tiendaanimales";
+        String user="root";
+        String contra="";
         connection = DriverManager.getConnection(url,user,contra);
-        regenerardatos();
+        
     }
-          public void regenerardatos() throws SQLException{
           
-        }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -81,25 +79,25 @@ static public Connection connection;
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("NumeroLinea");
         getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 92, -1, -1));
-        getContentPane().add(t1, new org.netbeans.lib.awtextra.AbsoluteConstraints(152, 92, 152, -1));
+        getContentPane().add(t1, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 90, 190, -1));
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("Articulo");
-        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 130, -1, -1));
-        getContentPane().add(t2, new org.netbeans.lib.awtextra.AbsoluteConstraints(152, 130, 152, -1));
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 140, -1, -1));
+        getContentPane().add(t2, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 140, 190, -1));
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setText("Precio");
-        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 168, -1, -1));
-        getContentPane().add(t3, new org.netbeans.lib.awtextra.AbsoluteConstraints(152, 168, 152, -1));
+        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 190, -1, -1));
+        getContentPane().add(t3, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 190, 190, -1));
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
         jLabel5.setText("Cantidad");
-        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 206, -1, -1));
-        getContentPane().add(t4, new org.netbeans.lib.awtextra.AbsoluteConstraints(152, 206, 152, -1));
+        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 240, -1, -1));
+        getContentPane().add(t4, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 240, 190, -1));
 
         jButton1.setText("Añadir");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -115,7 +113,7 @@ static public Connection connection;
                 jButton2ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(152, 261, 163, -1));
+        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 300, 190, -1));
 
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
         jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/proyecto/bosque.jpg"))); // NOI18N

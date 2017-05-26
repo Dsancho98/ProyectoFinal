@@ -31,9 +31,9 @@ public class ProductosVisualiza extends javax.swing.JFrame {
     public ProductosVisualiza() throws SQLException {
         initComponents();
         Connection con = null;
-        String url = "jdbc:mysql://localhost:3306/tiendaanimales";
-        String user = "Dependiente";
-        String contra = "roto2";
+         String url ="jdbc:mysql://localhost:3306/tiendaanimales";
+        String user="root";
+        String contra="";
         connection = DriverManager.getConnection(url, user, contra);
 
         Statement s = (Statement) connection.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
@@ -189,7 +189,7 @@ public class ProductosVisualiza extends javax.swing.JFrame {
                 jButton1ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 130, 85, -1));
+        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 130, 100, -1));
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
@@ -231,7 +231,7 @@ public class ProductosVisualiza extends javax.swing.JFrame {
                 jButton5ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 200, 85, -1));
+        getContentPane().add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 200, 100, -1));
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/proyecto/bosque.jpg"))); // NOI18N
         getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 610, 450));
@@ -262,11 +262,7 @@ public class ProductosVisualiza extends javax.swing.JFrame {
         log.setVisible(true);
         log.setLocationRelativeTo(null);
         this.setVisible(false);
-        try {
-            log.desconectar();
-        } catch (SQLException ex) {
-            Logger.getLogger(Menu.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        log.setLocationRelativeTo(null);
 
     }//GEN-LAST:event_jButton2ActionPerformed
 

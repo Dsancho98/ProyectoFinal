@@ -134,11 +134,7 @@ public class Menu extends javax.swing.JFrame {
         Login log = new Login();
         log.setVisible(true);
         this.setVisible(false);
-        try {
-            log.desconectar();
-        } catch (SQLException ex) {
-            Logger.getLogger(Menu.class.getName()).log(Level.SEVERE, null, ex);
-        }
+       
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed

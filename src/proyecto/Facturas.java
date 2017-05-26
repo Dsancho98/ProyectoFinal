@@ -32,10 +32,9 @@ static public Connection connection;
         aceptarbutton.setVisible(false);
         cancelbutton.setEnabled(false);
         cancelbutton.setVisible(false);*/
-         Login log = new Login();
-        String url ="jdbc:mysql://localhost:3306/tiendaanimales";
-        String user="Dependiente";
-        String contra="roto2";
+         String url ="jdbc:mysql://localhost:3306/tiendaanimales";
+        String user="root";
+        String contra="";
         connection = DriverManager.getConnection(url,user,contra);        
         regenerardatos();
      
@@ -139,13 +138,20 @@ static public Connection connection;
         jLabel5.setText("Fecha");
         getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 190, -1, -1));
 
+        PrecioTotal.setEditable(false);
         PrecioTotal.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 PrecioTotalActionPerformed(evt);
             }
         });
+        PrecioTotal.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                PrecioTotalKeyTyped(evt);
+            }
+        });
         getContentPane().add(PrecioTotal, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 140, 255, -1));
 
+        Fechancala.setEditable(false);
         Fechancala.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 FechancalaActionPerformed(evt);
@@ -174,10 +180,15 @@ static public Connection connection;
         });
         getContentPane().add(siguientebutton, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 90, 91, -1));
 
-        Identificador.setEnabled(false);
+        Identificador.setEditable(false);
         Identificador.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 IdentificadorActionPerformed(evt);
+            }
+        });
+        Identificador.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                IdentificadorKeyTyped(evt);
             }
         });
         getContentPane().add(Identificador, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 90, 255, -1));
@@ -312,15 +323,10 @@ static public Connection connection;
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         Login log = new Login();
-        log.setVisible(true);
-        log.setLocationRelativeTo(null);
         this.setVisible(false);
-        try {
-            log.desconectar();
-        } catch (SQLException ex) {
-            Logger.getLogger(Menu.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
+        log.setVisible(true);
+       log.setLocationRelativeTo(null);
+                
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -349,6 +355,18 @@ static public Connection connection;
             Logger.getLogger(Facturas.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_nuevobutton1ActionPerformed
+
+    private void IdentificadorKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_IdentificadorKeyTyped
+  char a = evt.getKeyChar();
+        if (!Character.isDigit(a)) {
+            evt.consume();
+        }    }//GEN-LAST:event_IdentificadorKeyTyped
+
+    private void PrecioTotalKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_PrecioTotalKeyTyped
+  char a = evt.getKeyChar();
+        if (!Character.isDigit(a)) {
+            evt.consume();
+        }    }//GEN-LAST:event_PrecioTotalKeyTyped
 
     
 

@@ -34,10 +34,9 @@ static public Connection connection;
         initComponents();        
         idobjet.setVisible(false);       
           Connection con = null;
-        Login log = new Login();
         String url ="jdbc:mysql://localhost:3306/tiendaanimales";
-        String user="Dependiente";
-        String contra="roto2";
+        String user="root";
+        String contra="";
         connection = DriverManager.getConnection(url,user,contra);
         
         Statement s = (Statement) connection.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
@@ -161,6 +160,7 @@ static public Connection connection;
         jLabel5.setText("Precio por unidad");
         getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 210, -1, -1));
 
+        Punidad.setEditable(false);
         Punidad.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 PunidadActionPerformed(evt);
@@ -173,6 +173,7 @@ static public Connection connection;
         jLabel6.setText("Precio total");
         getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 210, -1, -1));
 
+        Ptotal.setEditable(false);
         Ptotal.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 PtotalActionPerformed(evt);
@@ -185,6 +186,7 @@ static public Connection connection;
         jLabel7.setText("Existencias");
         getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 210, -1, -1));
 
+        exist.setEditable(false);
         exist.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 existActionPerformed(evt);
@@ -208,12 +210,17 @@ static public Connection connection;
                 jButton2ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 310, 62, 51));
+        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 320, 62, 51));
 
         txtcant.setText("1");
         txtcant.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtcantActionPerformed(evt);
+            }
+        });
+        txtcant.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtcantKeyTyped(evt);
             }
         });
         getContentPane().add(txtcant, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 140, 69, -1));
@@ -319,13 +326,15 @@ static public Connection connection;
         log.setVisible(true);
         log.setLocationRelativeTo(null);
         this.setVisible(false);
-        try {
-            log.desconectar();
-        } catch (SQLException ex) {
-            Logger.getLogger(Menu.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
+        log.setLocationRelativeTo(null);        
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void txtcantKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtcantKeyTyped
+          char a = evt.getKeyChar();
+        if (!Character.isDigit(a)) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtcantKeyTyped
 
 
 
